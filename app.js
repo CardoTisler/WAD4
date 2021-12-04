@@ -1,20 +1,15 @@
-var express = require('express'),
+const express = require('express'),
     app = express(),
-    postsRoutes = require("./routes/posts");
-//
-// const { Pool } = require("pg");
-// const pg = new Pool({
-//     host: 'localhost',
-//     port: 5432,
-//     user: 'postgres',
-//     password: 'postgres',
-//     database: 'postgres'
-// })
-//
-// Pool.query('SELECT NOW()', (err, res) => {
-//     console.log(err, res);
-//     Pool.end();
-// })
+    postsRoutes = require("./routes/posts"),
+    pool = require("./database");
+
+
+const getPostsFromDB = async () => {
+    await pool.query("SET search_path TO 'postsSchema'")
+    const posts = await pool.query("SELECT * FROM posts");
+    console.log(posts);
+}
+getPostsFromDB();
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
