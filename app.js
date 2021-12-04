@@ -1,20 +1,20 @@
 var express = require('express'),
     app = express(),
     postsRoutes = require("./routes/posts");
-
-const { Pool } = require("pg");
-const pg = new Pool({
-    host: 'localhost',
-    port: 5432,
-    user: 'postgres',
-    password: 'postgres',
-    database: 'postgres'
-})
-
-Pool.query('SELECT NOW()', (err, res) => {
-    console.log(err, res);
-    Pool.end();
-})
+//
+// const { Pool } = require("pg");
+// const pg = new Pool({
+//     host: 'localhost',
+//     port: 5432,
+//     user: 'postgres',
+//     password: 'postgres',
+//     database: 'postgres'
+// })
+//
+// Pool.query('SELECT NOW()', (err, res) => {
+//     console.log(err, res);
+//     Pool.end();
+// })
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
