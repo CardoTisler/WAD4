@@ -1,15 +1,6 @@
 const express = require('express'),
     app = express(),
-    postsRoutes = require("./routes/posts"),
-    pool = require("./database");
-
-
-const getPostsFromDB = async () => {
-    await pool.query("SET search_path TO 'postsSchema'")
-    const posts = await pool.query("SELECT * FROM posts");
-    console.log(posts);
-}
-getPostsFromDB();
+    postsRoutes = require("./routes/posts");
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));

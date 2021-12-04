@@ -1,3 +1,42 @@
 <%- include("../partials/header") %>
-<div>I am content</div>
+<div id="content" class="container">
+
+    <% postsArray.forEach((post) => { const {id, date, text, imagePath, title, likecount} = post; %>
+    <div class="card" style="width: 67rem; margin-top: 5rem;">
+        <div class="card-header d-flex flex-row justify-content-between" >
+            <img class="post_icon" alt="Profile icon" src="images/login.png" style="width: 7%">
+            <p><%- date.toLocaleDateString() %></p>
+        </div>
+        <img class="card-img-top" src=<%- imagePath %>>
+        <div class="card-body">
+            <h5 class="card-title">
+                <%- title %>
+            </h5>
+            <p class="card-text">
+                <%- text %>
+            </p>
+        </div>
+        <box-icon type='solid' name='like'></box-icon>
+        <div id="likeButton" class="d-flex flex-row align-center">
+            <button class="btn btn-info mr-3" style="width: 15%;" onclick="incrementLike(<%- id %>)"><i class="fas fa-thumbs-up"></i></button>
+            <p><%- likecount %></p>
+        </div>
+        <button class="btn btn-danger" style="width: 15%;" onclick="deletePost(<%- id%>)"><i class="fas fa-trash"></i></button>
+    </div>
+    <% }) %>
+</div>
+<script>
+    const incrementLike = async (id) => {
+        //use fetch to create request to proper path
+        await fetch("/posts/increment/".concat(id), {
+            method: "PUT"
+        }).then(res => location.reload());
+    }
+
+    const deletePost = async (id) => {
+        await fetch("/posts/delete/".concat(id), {
+            method: "DELETE"
+        }).then(res => location.reload());
+    }
+</script>
 <%- include("../partials/footer") %>
