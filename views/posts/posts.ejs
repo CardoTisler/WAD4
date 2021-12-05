@@ -1,13 +1,26 @@
 <%- include("../partials/header") %>
+
 <div id="content" class="container">
 
     <% postsArray.forEach((post) => { const {id, date, text, imagePath, title, likecount} = post; %>
+
     <div class="card" style="width: 67rem; margin-top: 5rem;">
         <div class="card-header d-flex flex-row justify-content-between" >
             <img class="post_icon" alt="Profile icon" src="images/login.png" style="width: 7%">
             <p><%- date.toLocaleDateString() %></p>
         </div>
-        <img class="card-img-top" src=<%- imagePath %>>
+        <div id="post_image">
+            <script type = "text/javascript">
+                var imgp = "<%= imagePath %>";
+                    if(imgp !== null){
+                    //<img class="card-img-top" src=<%- imagePath %>>
+                    var image = document.createElement("img");
+                    image.className = "card-img-top";
+                    image.src = imgp;
+                    document.getElementById("post_image").appendChild(image);
+                    }
+            </script>
+        </div>
         <div class="card-body">
             <h5 class="card-title">
                 <%- title %>
@@ -38,5 +51,7 @@
             method: "DELETE"
         }).then(res => location.reload());
     }
+    
 </script>
+
 <%- include("../partials/footer") %>

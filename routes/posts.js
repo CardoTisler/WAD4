@@ -6,17 +6,14 @@ router.get("/", async (req, res) => {
     // tells pool to look at postsSchema because our data isn't in the default schema
     await pool.query("SET search_path TO 'postsSchema'")
     try{
-        const posts = await pool.query("SELECT * FROM posts");
+        const posts = await pool.query("SELECT * FROM posts ORDER BY date");
         if(posts.length === 0){ console.error("No data found from database."); }
-        const date = JSON.stringify(posts.rows[0].date);
 
         //replace null values with image placeholder path
         const postsArray = posts.rows.map((post) => {
             let path = post.imagePath;
-            if(path === null){
-                path = 'https://bit.ly/31rTyeC';
-            }
             return {...post, imagePath: path};
+            
         })
         res.render("posts/posts", {postsArray})
     } catch (err){
