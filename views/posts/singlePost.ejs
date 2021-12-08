@@ -1,19 +1,15 @@
-<!-- TODO: If there are no posts in the database, the page should display "You did not post anything" -->
-
 <%- include("../partials/header") %>
-
-<div id="content" class="container">
-
-    <% postsArray.forEach((post) => { const {id, date, text, imagePath, title, likecount} = post; %>
-
+<!--render with single post-->
+<div class="container">
+    <% const {imagePath, date, title, text, likecount, id} = post; %>
     <div class="card" style="width: 67rem; margin-top: 5rem;">
         <div class="card-header d-flex flex-row justify-content-between">
-            <img class="post_icon" alt="Profile icon" src="images/login.png" style="width: 7%">
+            <img class="post_icon" alt="Profile icon" src="/images/login.png" style="width: 7%">
             <p><%- date.toLocaleDateString() %></p>
         </div>
         <% if(imagePath){ %>
             <div>
-                <img class="card-img-top" src="<%- imagePath %>"/>
+                <img class="card-img-top" src="<%- imagePath %>" />
             </div>
         <% } %>
         <div class="card-body">
@@ -30,23 +26,28 @@
                         class="fas fa-thumbs-up"></i></button>
             <p><%- likecount %></p>
         </div>
-        <a href="/posts/show/<%- id %>"><button class="btn btn-success" style="width: 15%;">View this post</button></a>
+        <button class="btn btn-danger" style="width: 15%;" onclick="deletePost(<%- id %>)"><i class="fas fa-trash"></i>
+        </button>
     </div>
-    <% }) %>
+
 </div>
+
 <script>
-    // TODO: Must disable like button instead of refreshing page.
+    const deletePost = async (id) => {
+        await fetch("/posts/delete/".concat(id), {
+            method: "DELETE"
+        }).then((res) => {
+            if(res.redirected){
+                window.location.href = res.url;
+            }
+        });
+    }
+    // TODO: Must disable(make it gray and unclickable) like button after liking once.
     const incrementLike = async (id) => {
         //use fetch to create request to proper path
         await fetch("/posts/increment/".concat(id), {
             method: "PUT"
-        }).then(res => location.reload());
-    }
-
-    const showPost = async (id) => {
-        await fetch("/posts/show/".concat(id), {
-            method: "GET"
-        })
+        });
     }
 </script>
 

@@ -1,0 +1,26 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+    <form method="POST" action="/posts/new">
+        <div class="form-group row">
+            <div class="col-5">
+                <strong><label for="title">Post title</label></strong>
+                <input type="text" maxlength="30" class="form-control" name="title">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-5">
+                <strong><label for="imagepath">URL for image</label></strong>
+                <input type="text" maxlength="30" class="form-control" name="imagePath">
+            </div>
+        </div>
+        <div class="form-group">
+            <strong><label for="description">Post description</label></strong>
+            <textarea rows="5" cols="50" maxlength="255" class="form-control" name="description"></textarea>
+        </div>
+
+        <button>Add new recipe!</button>
+    </form>
+</div>
+
+<%- include("../partials/footer") %>
