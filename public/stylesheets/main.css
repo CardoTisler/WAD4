@@ -14,3 +14,10 @@
     display: grid;
     grid-template-rows: auto 4fr 0.1fr;
  }
+
+.no_posts{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
