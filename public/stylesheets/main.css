@@ -8,3 +8,9 @@
     background-color: cornflowerblue;
     border-color: lightblue; /*set the color you want here*/
 }
+
+#wrapper {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 4fr 0.1fr;
+ }
