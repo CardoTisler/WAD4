@@ -41,7 +41,6 @@
             }
         });
     }
-    // TODO: Must disable(make it gray and unclickable) like button after liking once.
     const incrementLike = async (id) => {
         //use fetch to create request to proper path
         await fetch("/posts/increment/".concat(id), {
