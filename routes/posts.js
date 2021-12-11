@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
     // tells pool to look at postsSchema because our data isn't in the default schema
     await pool.query("SET search_path TO 'postsSchema'")
         .then(async () => {
-            await pool.query("SELECT * FROM posts ORDER BY date")
+            await pool.query("SELECT * FROM posts ORDER BY date DESC, id")
                 .then((databaseResponse) => {
                     const postsArray = databaseResponse.rows;
                     if(postsArray.length === 0){ console.error("No data found from database."); }

@@ -21,10 +21,9 @@
             </p>
         </div>
         <box-icon type='solid' name='like'></box-icon>
-        <div id="likeButton" class="d-flex flex-row align-center">
-            <button class="btn btn-info mr-3" style="width: 15%;" onclick="incrementLike(<%- id %>)"><i
-                        class="fas fa-thumbs-up"></i></button>
-            <p><%- likecount %></p>
+        <div id="likeButton" class="d-flex flex-row align-center ml-3">
+            <p><%- likecount %> <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+            </p>
         </div>
         <button class="btn btn-danger" style="width: 15%;" onclick="deletePost(<%- id %>)"><i class="fas fa-trash"></i>
         </button>

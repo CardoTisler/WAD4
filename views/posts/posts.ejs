@@ -8,7 +8,6 @@
     </div>
     <%} else {%>
         <% postsArray.forEach((post) => { const {id, date, text, imagePath, title, likecount} = post; %>
-
         <div class="card" style="width: 67rem; margin-top: 5rem;">
             <div class="card-header d-flex flex-row justify-content-between">
                 <img class="post_icon" alt="Profile icon" src="images/login.png" style="width: 7%">
@@ -29,9 +28,9 @@
             </div>
             <box-icon type='solid' name='like'></box-icon>
             <div id="likeButton" class="d-flex flex-row align-center">
-                <button class="btn btn-info mr-3" style="width: 15%;" onclick="incrementLike(<%- id %>)"><i
+                <button id="likeButton<%- post.id%>" class="btn btn-info mr-3" style="width: 15%;" onclick= "incrementLike(<%- id %>,<%- likecount %>)"><i
                             class="fas fa-thumbs-up"></i></button>
-                <p><%- likecount %></p>
+                <p id = "likeText<%- post.id%>"><%- likecount %></p>
             </div>
             <a href="/posts/show/<%- id %>"><button class="btn btn-success" style="width: 15%;">View this post</button></a>
         </div>
@@ -40,12 +39,16 @@
 
 </div>
 <script>
-    // TODO: Must disable like button instead of refreshing page.
-    const incrementLike = async (id) => {
+    const incrementLike = async (id,likecount) => {
         //use fetch to create request to proper path
         await fetch("/posts/increment/".concat(id), {
             method: "PUT"
-        }).then(res => location.reload());
+        }).then(disableLike(id,likecount));
+    }
+
+    function disableLike(id,likecount){
+        document.getElementById("likeButton" +id).disabled = true;
+        document.getElementById("likeText" + id).innerText = likecount + 1;
     }
 
     const showPost = async (id) => {
@@ -53,6 +56,6 @@
             method: "GET"
         })
     }
+        
 </script>
-
 <%- include("../partials/footer") %>

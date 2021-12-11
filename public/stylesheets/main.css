@@ -1,12 +1,12 @@
 .btn-primary {
     color: black;
     background-color: white;
-    border-color: lightblue; /*set the color you want here*/
+    border-color: lightblue; 
 }
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active{
     color: black;
     background-color: cornflowerblue;
-    border-color: lightblue; /*set the color you want here*/
+    border-color: lightblue; 
 }
 
 #wrapper {
@@ -20,4 +20,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.btn-info{
+    color: cornflowerblue;
+    background-color: white;
+}
+.btn-info:hover, .btn-info:active{
+    color: black;
+    background-color: cornflowerblue;
+    border-color: lightblue;
+}
+.btn-info:disabled{
+    background-color: cornflowerblue;
+    opacity: 0.5;
+    border-color: white;
+
 }
